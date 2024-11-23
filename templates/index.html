@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Try On</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white; /* Màu nền trắng */
+            color: black; /* Màu chữ đen */
+        }
+        header {
+            background-color: white; /* Màu nền trắng cho tiêu đề */
+            color: black; /* Màu chữ đen */
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-family: 'Times New Roman', Times, serif; /* Kiểu chữ Times New Roman */
+            font-weight: normal; /* Không in đậm */
+        }
+        .background-section {
+            background-image: url('https://fptvton.s3.ap-southeast-2.amazonaws.com/static/A%CC%89nh+ma%CC%80n+hi%CC%80nh+2024-10-15+lu%CC%81c+21.58.43.png'); /* Đường dẫn tới ảnh nền */
+            background-size: cover;
+            background-position: center;
+            height: 100vh; /* Chiều cao 100% viewport height */
+            margin: 0;
+            display: flex;
+            align-items: center; /* Căn giữa nội dung theo chiều dọc */
+            justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+        }
+
+        /* Section title below background */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 25px 0; /* Khoảng cách trên và dưới */
+            font-weight: bold;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .product-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 10px;
+        }
+        .product-item img {
+            width: 100%;
+            height: auto;
+        }
+        .product-item h3 {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+        .product-item p.price {
+            font-size: 1rem;
+            color: #555;
+            margin: 5px 0;
+        }
+        .product-item button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .product-item button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Virtual Try On</h1>
+    </header>
+
+    <!-- Background Image Section -->
+    <div class="background-section"></div>
+        <!-- Section Title: Tất cả sản phẩm -->
+    <div class="section-title">
+        TẤT CẢ SẢN PHẨM
+    </div>
+
+
+  <!-- Product Grid -->
+    <div class="product-grid">
+        {% for product in products %}  <!-- Bắt đầu vòng lặp qua danh sách products -->
+        <div class="product-item">
+            <img src="{{ product['image'] }}" alt="{{ product['name'] }}">
+            <h3>{{ product['name'] }}</h3>
+            <p>{{ product['price'] }}</p>
+            <!-- Wrap the button inside a link to product detail page -->
+            <a href="/product/{{ product['id'] }}">
+                <button>Try On</button>
+            </a>
+        </div>
+        {% endfor %}  <!-- Kết thúc vòng lặp -->
+    </div>
+
+</body>
+</html>
